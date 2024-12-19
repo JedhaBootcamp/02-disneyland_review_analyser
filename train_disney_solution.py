@@ -11,15 +11,6 @@ mlflow.set_tracking_uri(os.environ["APP_URI"])
 
 if __name__=="__main__":
 
-    ### MLFLOW Experiment setup
-    experiment_name="Disneyland_review_detector"
-    mlflow.set_experiment(experiment_name)
-    experiment = mlflow.get_experiment_by_name(experiment_name)
-
-    client = mlflow.tracking.MlflowClient()
-    run = client.create_run(experiment.experiment_id)
-
-
     # Parse arguments given in shell script
     parser = argparse.ArgumentParser()
     parser.add_argument("--epochs")
@@ -28,7 +19,7 @@ if __name__=="__main__":
     
 
     ### Create autolog 
-    mlflow.tensorflow.autolog(log_models=False)
+    mlflow.tensorflow.autolog()
 
     ### Import dataset of french reviews of Disneyland
     french_reviews = pd.read_csv("https://full-stack-assets.s3.eu-west-3.amazonaws.com/images/M08-DeepLearning/NLP/french_review_clean.csv")
@@ -88,7 +79,7 @@ if __name__=="__main__":
     weights = {index : values for index , values in zip(weights.index,weights.values)}
 
     # Log experiment to MLFlow
-    with mlflow.start_run(run_id = run.info.run_id) as run:
+    with mlflow.start_run() as run:
         #### Training model 
         epochs = int(args.epochs)
         model.fit(X_train,
