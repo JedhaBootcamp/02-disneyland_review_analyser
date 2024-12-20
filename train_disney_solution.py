@@ -44,7 +44,7 @@ if __name__=="__main__":
 
     tags = set(["train"])
     pre_trained_model = 'https://kaggle.com/models/google/mobilebert/frameworks/TensorFlow2/variations/xs-qat/versions/1'
-    bert_module = hub.Module(hub_url, tags=tags, trainable=False)
+    bert_module = hub.Module(pre_trained_model, tags=tags, trainable=False)
     model = tf.keras.Sequential([
                     # Pretrained model
                     bert_module,
