@@ -59,7 +59,7 @@ if __name__=="__main__":
 
     ### Configure learning rate
 
-    optimizer= tf.keras.optimizers.Adam(learning_rate= args.lr)
+    optimizer= tf.keras.optimizers.Adam(learning_rate= float(args.lr))
 
     model.compile(optimizer=optimizer,
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(),
