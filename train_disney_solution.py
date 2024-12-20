@@ -7,7 +7,7 @@ from mlflow.models.signature import infer_signature
 import os
 
 # Set tracking URI to your Heroku application
-mlflow.set_tracking_uri(os.environ["APP_URI"])
+# mlflow.set_tracking_uri(os.environ["APP_URI"])
 
 if __name__=="__main__":
 
