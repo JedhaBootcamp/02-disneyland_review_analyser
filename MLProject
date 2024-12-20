@@ -11,6 +11,6 @@ docker_env:
 entry_points:
   main:
     parameters:
-      initial_lr: {type: float, default: 0.0001}
+      lr: {type: float, default: 0.0001}
       epochs: {type: int, default: 1}
-    command: "python train_disney_solution.py --epochs {epochs}  --initial_lr {initial_lr}"
+    command: "python train_disney_solution.py --epochs {epochs}  --lr {lr}"

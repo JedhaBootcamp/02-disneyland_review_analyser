@@ -14,7 +14,7 @@ if __name__=="__main__":
     # Parse arguments given in shell script
     parser = argparse.ArgumentParser()
     parser.add_argument("--epochs")
-    parser.add_argument("--initial_lr")
+    parser.add_argument("--lr")
     args = parser.parse_args()
     
 
@@ -59,7 +59,7 @@ if __name__=="__main__":
 
     ### Configure learning rate
 
-    optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001)
+    optimizer= tf.keras.optimizers.Adam(learning_rate= args.lr)
 
     model.compile(optimizer=optimizer,
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(),
