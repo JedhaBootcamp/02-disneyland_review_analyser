@@ -58,16 +58,8 @@ if __name__=="__main__":
     ])
 
     ### Configure learning rate
-    lr = float(args.initial_lr)
-    initial_learning_rate = lr
 
-    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
-        initial_learning_rate,
-        decay_steps=30,
-        decay_rate=0.96,
-        staircase=True)
-
-    optimizer= tf.keras.optimizers.Adam(learning_rate= lr_schedule)
+    optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001)
 
     model.compile(optimizer=optimizer,
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(),
@@ -91,12 +83,4 @@ if __name__=="__main__":
 
 
         predictions = model.predict(X_train)
-
-        # Log model seperately to have more flexibility on setup 
-        mlflow.keras.log_model(
-            keras_model=model,
-            artifact_path="Sentiment_detector",
-            registered_model_name="Sentiment_detector_RNN",
-            signature=infer_signature(french_reviews, predictions)
-        )
         
