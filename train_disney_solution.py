@@ -86,10 +86,10 @@ if __name__=="__main__":
         predictions = model.predict(X_train)
 
         # Log model seperately to have more flexibility on setup 
-        mlflow.keras.log_model(
-            keras_model=model,
-            artifact_path="Sentiment_detector",
-            registered_model_name="Sentiment_detector_RNN",
-            signature=infer_signature(french_reviews, predictions)
-        )
+        #mlflow.keras.log_model(
+        #    keras_model=model,
+        #    artifact_path="Sentiment_detector",
+        #    registered_model_name="Sentiment_detector_RNN",
+        #    signature=infer_signature(french_reviews, predictions)
+        #)
         
