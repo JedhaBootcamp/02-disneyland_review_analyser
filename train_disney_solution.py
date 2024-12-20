@@ -42,17 +42,12 @@ if __name__=="__main__":
     y_test = tf.convert_to_tensor(test_set["stars"]-1)
 
 
-    from transformers import FunnelTokenizer, TFFunnelModel
-    tokenizer = FunnelTokenizer.from_pretrained("funnel-transformer/small")
-    base_model = TFFunnelModel.from_pretrained("funnel-transformer/small")
-    text = "Replace me by any text you'd like."
-    encoded_input = tokenizer(text, return_tensors='tf')
-    output = model(encoded_input)
+    pre_trained_model="https://tfhub.dev/google/nnlm-en-dim50/2"
 
     model = tf.keras.Sequential([
-                    tokenizer,
                     # Pretrained model
-                    base_model,
+                    hub.KerasLayer(pre_trained_model, input_shape=[], dtype=tf.string, trainable=False),
+
                     # Dense layers once the data is flat
                     #tf.keras.layers.Dense(64, activation='relu'),
                     #tf.keras.layers.Dropout(0.3),
