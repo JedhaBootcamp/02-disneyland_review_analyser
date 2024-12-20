@@ -45,7 +45,7 @@ if __name__=="__main__":
     pre_trained_model="https://tfhub.dev/google/nnlm-en-dim50/2"
     model = tf.keras.Sequential([
                     # Pretrained model
-                    hub.KerasLayer(pre_trained_model, input_shape=[], dtype=tf.string, trainable=True),
+                    hub.KerasLayer(pre_trained_model, input_shape=[], dtype=tf.string, trainable=False),
 
                     # Dense layers once the data is flat
                     #tf.keras.layers.Dense(64, activation='relu'),
