@@ -42,12 +42,17 @@ if __name__=="__main__":
     y_test = tf.convert_to_tensor(test_set["stars"]-1)
 
 
-    tags = set(["train"])
-    pre_trained_model = 'https://kaggle.com/models/google/mobilebert/frameworks/TensorFlow2/variations/xs-qat/versions/1'
-    bert_module = hub.Module(pre_trained_model, tags=tags, trainable=False)
+    from transformers import FunnelTokenizer, TFFunnelModel
+    tokenizer = FunnelTokenizer.from_pretrained("funnel-transformer/small")
+    base_model = TFFunnelModel.from_pretrained("funnel-transformer/small")
+    text = "Replace me by any text you'd like."
+    encoded_input = tokenizer(text, return_tensors='tf')
+    output = model(encoded_input)
+
     model = tf.keras.Sequential([
+                    tokenizer,
                     # Pretrained model
-                    bert_module,
+                    base_model,
                     # Dense layers once the data is flat
                     #tf.keras.layers.Dense(64, activation='relu'),
                     #tf.keras.layers.Dropout(0.3),
