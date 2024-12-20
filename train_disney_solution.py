@@ -42,11 +42,12 @@ if __name__=="__main__":
     y_test = tf.convert_to_tensor(test_set["stars"]-1)
 
 
-    pre_trained_model="https://tfhub.dev/google/nnlm-en-dim50/2"
+    tags = set(["train"])
+    pre_trained_model = 'https://kaggle.com/models/google/mobilebert/frameworks/TensorFlow2/variations/xs-qat/versions/1'
+    bert_module = hub.Module(hub_url, tags=tags, trainable=False)
     model = tf.keras.Sequential([
                     # Pretrained model
-                    hub.KerasLayer(pre_trained_model, input_shape=[], dtype=tf.string, trainable=False),
-
+                    bert_module,
                     # Dense layers once the data is flat
                     #tf.keras.layers.Dense(64, activation='relu'),
                     #tf.keras.layers.Dropout(0.3),
